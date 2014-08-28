@@ -29,16 +29,7 @@ TrueVault.decode = function(base64){
   return JSON.parse(baseParse2);
 };
 
-
-
 Meteor.methods({
-  // --insert
-  // --findOne
-  // --update
-  // --remove
-  // fetch
-
-
   insertTrueVault: function(doc){
     var options = {
       auth: TrueVault.settings["API_KEY"] + ":" + "",
@@ -48,15 +39,13 @@ Meteor.methods({
     };
 
     var result = HTTP.call("POST", TrueVault.urlVault(), options);
-
-    console.log(result);
+    // console.log(result);
 
     if(result.data.result === "success"){
       // insert into collection
       Vault.insert({
         userId: this.userId,
-        document_id: result.data.document_id,
-        transaction_id: result.data.transaction_id
+        document_id: result.data.document_id
       });
     } else {
       throw new Meteor.Error(result.statusCode, result.content);
@@ -70,7 +59,7 @@ Meteor.methods({
     };
 
     var result = HTTP.call("GET", url, options);
-    console.log(result);
+    // console.log(result);
     
     if(result.statusCode === 200){
       var decoded = TrueVault.decode(result.content);
@@ -79,8 +68,6 @@ Meteor.methods({
     } else {
       throw new Meteor.Error(result.statusCode, result.error.messsage);
     }
-    
-
   }, //getTrueVault
 
   updateTrueVault: function(docId, doc){
@@ -93,11 +80,8 @@ Meteor.methods({
     };
 
     var result = HTTP.call("PUT", url, options);
-
-    console.log(result);
-
-    // FOR UPDATING, PERHAPS JUST STORE THE TRANSACTION ID
-    // FOR LOGGING, PERHAPS HAVE A METHOD THAT TRACKS ALL CALLS: USERID AND RESULT 
+    // console.log(result);
+    return result.statusCode;
   }, //updateTrueVault
 
   removeTrueVault: function(docId){
@@ -107,7 +91,7 @@ Meteor.methods({
     };
 
     var result = HTTP.call("DELETE", url, options);
-    console.log(result);
+    // console.log(result);
     
     // REMOVE DOCUMENT FROM DB ON SUCCESS
     if(result.statusCode === 200){
@@ -115,10 +99,13 @@ Meteor.methods({
     } else {
       throw new Meteor.Error(result.statusCode, result.content);
     }
-    
   }, //removeTrueVault
 
-
+  fetchTrueVault: function(arrayOfDocIds){
+    var message = "fetchTrueVault is not currently implemented";
+    console.log(message);
+    return message;
+  },
 });
 
 

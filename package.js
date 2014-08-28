@@ -1,7 +1,7 @@
 Package.describe({
   summary: "Use the TrueVault REST API easily with Meteor.",
-  version: "1.0.0",
-  git: " \* Fill me in! *\ "
+  version: "0.1.0",
+  git: "https://github.com/davidwoody/TrueVault-REST-API-for-Meteor.git"
 });
 
 Package.onUse(function(api) {
@@ -18,6 +18,7 @@ Package.onUse(function(api) {
 
   // Export the object 'TrueVault' to packages or apps that use this package.
   api.export('TrueVault', 'server');
+  api.export('Vault', 'client');
 });
 
 Package.onTest(function(api) {

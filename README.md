@@ -8,12 +8,12 @@ Use the TrueVault REST API easily with Meteor.
 2. Add the package to your app `meteor add woody:truevault`
 3. On the **server**, include the following: 
 ```
-Meteor.startup({
+Meteor.startup(function(){
     TrueVault.config({
       "API_KEY": "PASTE_YOUR_KEY",
       "VAULT_ID": "PASTE_YOUR_VAULT_ID"
     });
-  });
+});
 ```
 
 ### Overview

@@ -18,7 +18,7 @@ var trueVaultReactive = function () {
   // update real TrueVault to insure changes are saved
   Tracker.autorun(function () {
     var vault = Vault.findOne({userId: Meteor.userId()});
-    var trueVault = TrueVault.findOne({userId: Meteor.userId()});
+    var trueVault = TrueVault.findOne();
     if(vault && trueVault){
       console.log("Tracker1 called updateTrueVault");
       Meteor.call('updateTrueVault', trueVault, function(err, result){

@@ -8,8 +8,8 @@ Package.onUse(function(api) {
   api.versionsFrom('METEOR@0.9.0');
   api.use('http', 'server');
   api.use('underscore');
-  api.use('mongo');
-  api.use('tracker');
+  api.use('mongo@1.0.6');
+  api.use('tracker@1.0.2');
 
   api.addFiles('hmac-sha256.js', 'server');
   api.addFiles('enc-base64-min.js', 'server');

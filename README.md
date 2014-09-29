@@ -44,9 +44,7 @@ Interact via the provided **client-only** collection called `TrueVault`. This co
 Use the TrueVault object on the server to do things like `TrueVault.insert(doc, userId)`. Use the simple server API documented below. More care must be taken if this method is chosen.
 
 
-## API
-
-### Client
+## API - Client
 
 #### TrueVault
 
@@ -57,11 +55,11 @@ A standard Meteor Mongo Collection. Contains a mirror of the currently logged in
 A standard Meteor Mongo Collection. Contains the TrueVault mapping for the currently logged in user. i.e. `{userId: "VAL", document_id: "VAL"}`.
 
 
-### Server
+## API - Server
 
 #### TrueVault
 
-An object with a number of methods:
+An object with a number of useful methods:
 
 **TrueVault.insert(doc, userId)**
 

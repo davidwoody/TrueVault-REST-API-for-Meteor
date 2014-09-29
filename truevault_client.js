@@ -1,7 +1,3 @@
-// Setup a dependency to track when TrueVault (client only collection) has been updated
-// to trigger the TrueVault.update call to insure the data is stored in TrueVault
-// var TrueVaultDep = new Tracker.Dependency();
-
 // Contains a "replica" of real TrueVault document owned by logged in user
 TrueVault = new Mongo.Collection(null);
 
@@ -74,67 +70,3 @@ if(isReative){
 } else {
   trueVaultNotReactive();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// TODO: INCORPORATE INTO TRUEVAULT CONFIG
-// var VaultStructure = {
-//   responses: [],
-//   weight: null,
-//   height: null,
-//   tobaccoUser: null,
-//   tobaccoDaily: null,
-//   tobaccoYears: null,
-//   modActivity: null,
-//   vigActivity: null,
-//   strengthWeekly: null,
-//   dietScore: {
-//     fiveServings: null,
-//     typicalMeal: null,
-//     milk: null,
-//     grains: null
-//   },
-//   tobacco: {
-//     qScore: null,
-//     confidence: null,
-//     importance: null
-//   },
-//   diet: {
-//     qScore: null,
-//     confidence: null,
-//     importance: null
-//   },
-//   exercise: {
-//     qScore: null,
-//     confidence: null,
-//     importance: null
-//   },
-//   goal: {
-//     name: null,
-//     confidence: null,
-//     importance: null
-//   }
-// };
-
-
-// VaultInitializor = function(){
-//   this.userId = Meteor.userId();
-//   _.extend(this, VaultStructure);
-// };

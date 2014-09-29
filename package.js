@@ -14,15 +14,12 @@ Package.onUse(function(api) {
   api.addFiles('hmac-sha256.js', 'server');
   api.addFiles('enc-base64-min.js', 'server');
 
-  api.export('CryptoJS', 'server');
-
   api.addFiles('truevault_both.js');
   api.addFiles('truevault_client.js', 'client');
   api.addFiles('truevault_server.js', 'server');
 
   // Export the object 'TrueVault' to packages or apps that use this package.
-  api.export('TrueVault', 'client');
-  api.export('TrueVault', 'server');
+  api.export('TrueVault');
   api.export('Vault');
 });
 

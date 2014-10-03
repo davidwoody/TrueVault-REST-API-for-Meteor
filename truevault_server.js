@@ -165,7 +165,7 @@ Meteor.methods({
   }, //initializeTrueVault
 
   // FIND LOGGED IN USERS TRUEVAULT RECORD
-  findOneTrueVault: function(){
+  findOneTrueVault: function () {
     checkForLoggedInUser(this);
 
     var vault = findExistingVault(this.userId);
@@ -174,7 +174,8 @@ Meteor.methods({
   }, //getTrueVault
 
   // UPDATES THE LOGGED IN USERS TRUEVAULT RECORD WITH DOC THAT IS PASSED
-  updateTrueVault: function(doc){
+  updateTrueVault: function (doc) {
+    check(doc, Object);
     checkForLoggedInUser(this);
 
     if(!doc) {
@@ -189,7 +190,7 @@ Meteor.methods({
 
 
 // PUBLISH THE VAULT INFORMATION FOR THE SIGNED IN USER
-Meteor.publish(null, function(){
+Meteor.publish(null, function () {
   if(this.userId){
     return Vault.find({userId: this.userId});
   } else {

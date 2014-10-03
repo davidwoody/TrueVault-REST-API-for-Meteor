@@ -10,6 +10,7 @@ Package.onUse(function(api) {
   api.use('underscore');
   api.use('mongo@1.0.6');
   api.use('tracker@1.0.2');
+  api.use('audit-argument-checks@1.0.0');
 
   api.addFiles('hmac-sha256.js', 'server');
   api.addFiles('enc-base64-min.js', 'server');

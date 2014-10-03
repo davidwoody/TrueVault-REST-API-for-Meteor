@@ -6,7 +6,8 @@ Use the TrueVault REST API easily with Meteor.
 ## Setup
 1. Sign up for TrueVault and create a Vault and a User. **Tip:** Follow these instruction - https://www.truevault.com/documentation/quick-start.html
 2. Add the package to your app `meteor add woody:truevault`
-3. On the **server**, include the following configuration: 
+3. On the **server**, include the following configuration:
+
 ```
 Meteor.startup(function(){
     TrueVault.config({
@@ -27,12 +28,11 @@ Accounts.onCreateUser(function (options, user) {
     user.profile = options.profile;
   return user;
 });
-
 ```
 
 ## Overview
 
-This package requires an **accounts system**. The pattern used is one TrueVault document per Meteor user. On the client and the server, there is a `Collection` called `Vault`, which contains the TrueVault mapping for the Meteor user. The `Vault` collection on the client will only contain the record for the currently logged in user. There are **two ways** to use this package, the suggested (easy) way or a custom (advanced) way for different use cases. Both ways are summarized below.
+This package requires an **accounts system**. The pattern used is one TrueVault document per Meteor user. On the client and the server, there is a `Collection` called `Vault`, which contains the TrueVault mapping for the Meteor user. The `Vault` collection on the client will only contain the record for the currently logged in user. There are **two ways** to use this package, the suggested (easy) way or a custom (advanced) way for different use cases. Both ways are summarized below. Also, SSL must be used in production - `meteor add force-ssl`.
 
 
 ### The Suggested (Easy) Way
@@ -105,10 +105,34 @@ Takes one argument, a JavaScript object, and updates the logged in users entire 
 
 ### Roadmap
 
-1. ~~Simple way to store and retreive user records in TrueVault.~~
-2. Make compatable with `audit-arguments-check` package.
+1. ~~Simple way to store and retrieve user records in TrueVault.~~
+2. ~~Make compatible with `audit-arguments-check` package.~~
 3. Integrate TrueVault Blob API.
 
+**Please Note:**
+
+HIPAA compliance is highly complex. This Meteor package cannot guarantee you will be compliant. Please consult experts to make sure you are doing this right!
+
 ### License
+
+Copyright (c) 2014 David Woody
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
 
 MIT - http://opensource.org/licenses/MIT

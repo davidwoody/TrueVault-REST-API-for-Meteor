@@ -96,8 +96,6 @@ TrueVault.update = function (docId, doc) {
   };
 
   var result = HTTP.call("PUT", url, options);
-  console.log("statusCode: " + result.statusCode);
-  console.log(result.statusCode === 200);
 
   if(result.statusCode === 200){
     Vault.update({document_id: docId}, {$inc: {version: 1}});

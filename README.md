@@ -3,20 +3,19 @@ TrueVault for Meteor
 
 Use the TrueVault REST API easily with Meteor.
 
-## Setup
+# Setup
 1. Sign up for TrueVault and create a Vault and a User. **Tip:** Follow these instruction - https://www.truevault.com/documentation/quick-start.html
 2. Add the package to your app `meteor add woody:truevault`
 3. On the **server**, include the following configuration:
 
 ```
 Meteor.startup(function(){
-    TrueVault.config({
-      "API_KEY": "PASTE_YOUR_KEY",
-      "VAULT_ID": "PASTE_YOUR_VAULT_ID"
-    });
+  TrueVault.config({
+    "API_KEY": "PASTE_YOUR_KEY",
+    "VAULT_ID": "PASTE_YOUR_VAULT_ID"
+  });
 });
 
-// Optional, but recommended.
 // Add a default record to be stored on TrueVault after a user is created
 Accounts.onCreateUser(function (options, user) {
   TrueVault.insert({
@@ -24,13 +23,14 @@ Accounts.onCreateUser(function (options, user) {
   }, user._id);
 
   // Keep the default hook's 'profile' behavior.
-  if (options.profile)
+  if (options.profile){
     user.profile = options.profile;
+  }
   return user;
 });
 ```
 
-## Overview
+# Overview
 
 This package requires an **accounts system**. The pattern used is one TrueVault document per Meteor user. On the client and the server, there is a `Collection` called `Vault`, which contains the TrueVault mapping for the Meteor user. The `Vault` collection on the client will only contain the record for the currently logged in user. There are **two ways** to use this package, the suggested (easy) way or a custom (advanced) way for different use cases. Both ways are summarized below. Also, SSL must be used in production - `meteor add force-ssl`.
 
@@ -44,44 +44,51 @@ Interact via the provided **client-only** collection called `TrueVault`. This co
 Use the TrueVault object on the server to do things like `TrueVault.insert(doc, userId)`. Use the simple server API documented below. More care must be taken if this method is chosen.
 
 
-## API - Client
+# API - Client
 
-#### TrueVault
+### TrueVault
 
 A standard Meteor Mongo Collection. Contains a mirror of the currently logged in users TrueVault record. When you do something like `TrueVault.update()`, the updates are automatically sent and stored on real TrueVault.
 
-#### Vault
+### Vault
 
-A standard Meteor Mongo Collection. Contains the TrueVault mapping for the currently logged in user. i.e. `{userId: "VAL", document_id: "VAL"}`.
+A standard Meteor Mongo Collection. Contains the TrueVault mapping for the currently logged in user: 
+```
+userId: String, 
+document_id: String,
+version: Number
+```
+
+The `version` is incremented each time `TrueVault.update()` is successfully called on the server. Whenever the version number changes, the client fetches the new updates. While updating or fetching updates, a `Session` variable is set to `true`. You can use the value with `Session.get('isTrueVaultUpdating')`, but don't set it.
 
 
-## API - Server
+# API - Server
 
-#### TrueVault
+### TrueVault
 
 An object with a number of useful methods:
 
-**TrueVault.insert(doc, userId)**
+#### TrueVault.insert(doc, userId)
 
 The `doc` arg should be a standard JavaScript object to store on TrueVault. The `userId` is used to save the mapping in the `Vault` collection.
 
-**TrueVault.findOne(document_id)**
+#### TrueVault.findOne(document_id)
 
 Return the document on TrueVault based on the `document_id` that is passed.
 
-**TrueVault.update(document_id, doc)**
+#### TrueVault.update(document_id, doc)
 
 The `document_id` is the selector, and the `doc` argument is what to update the **entire** record to. The entire record will be replaced by the passed `doc`.
 
-**TrueVault.remove(document_id)**
+#### TrueVault.remove(document_id)
 
 Removes the specified document on TrueVault. This should be used with extreme care.
 
-**TrueVault.config(obj)**
+#### TrueVault.config(obj)
 
 Extends the `settings` property on the server TrueVault object.
 
-**TrueVault.settings**
+#### TrueVault.settings
 
 An object that should have the following properties:
 ```
@@ -91,14 +98,14 @@ API_VAULTID: (set in the config call as documented in Setup above)
 ```
 
 
-#### Meteor Methods
+### Meteor Methods
 Ex: `Meteor.call('METHOD_NAME', args)`
 
-**findOneTrueVault**
+#### findOneTrueVault
 
 Returns the logged in users TrueVault record. Takes no arguments.
 
-**updateTrueVault**
+#### updateTrueVault
 
 Takes one argument, a JavaScript object, and updates the logged in users entire TrueVault document to the passed object.
 
@@ -109,9 +116,9 @@ Takes one argument, a JavaScript object, and updates the logged in users entire 
 2. ~~Make compatible with `audit-arguments-check` package.~~
 3. Integrate TrueVault Blob API.
 
-**Please Note:**
+#### Please Note:
 
-HIPAA compliance is highly complex. This Meteor package cannot guarantee you will be compliant. Please consult experts to make sure you are doing this right!
+HIPAA compliance is highly complex. This Meteor package cannot guarantee you will be compliant. Please consult experts to make sure you are doing this correctly. This package is not officially supported by TrueVault.
 
 ### License
 

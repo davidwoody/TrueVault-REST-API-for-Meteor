@@ -35,8 +35,10 @@ Tracker.autorun(function () {
     // user logged in, load TrueVault records
     Meteor.call('findOneTrueVault', function (err, result) {
       updating(false);
-      if(err && err.error !== 401) {
-        console.warn(err);
+      if(err) {
+        if(err.error !== 401){
+          console.warn(err);
+        }
       } else {
         TrueVault.remove({});
         TrueVault.insert(result);
@@ -54,8 +56,10 @@ Tracker.autorun(function () {
   updating(true);
   Meteor.call('findOneTrueVault', function (err, result) {
     updating(false);
-    if(err && err.error !== 401) {
-      console.warn(err);
+    if(err) {
+      if(err.error !== 401){
+        console.warn(err);
+      }
     } else {
       TrueVault.remove({});
       TrueVault.insert(result);

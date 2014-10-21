@@ -146,7 +146,7 @@ var findExistingVault = function (userId) {
   if(existingVault){
     return existingVault;
   } else {
-    throw new Meteor.Error(400, "This user does not have an existing record the Vault collection.");
+    throw new Meteor.Error(401, "This user does not have an existing record the Vault collection.");
   }
 };
 

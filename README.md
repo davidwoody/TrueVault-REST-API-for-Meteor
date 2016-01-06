@@ -4,7 +4,7 @@ TrueVault for Meteor
 Use the TrueVault REST API easily with Meteor.
 
 # Setup
-1. Sign up for TrueVault and create a Vault and a User. **Tip:** Follow these instruction - https://www.truevault.com/documentation/quick-start.html
+1. Sign up for TrueVault and create a Vault and a User. **Tip:** Follow these instruction - https://www.truevault.com/quick-start-guide.html
 2. Add the package to your app `meteor add woody:truevault`
 3. On the **server**, include the following configuration:
 
